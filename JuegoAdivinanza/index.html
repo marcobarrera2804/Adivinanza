@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width">
+
+ <title>Servicio del juego de adivinanza</title>
+
+</head>
+
+<body>
+
+ <h1>Servicio del juego de adivinanza</h1>
+
+ <form onsubmit="procesaForm(event) ">
+
+  <p>
+   <label>
+    Adivinanza: ¿Qué tiene dientes pero no puede masticar?
+
+    <input name="adivinanza">
+   </label>
+  </p>
+
+
+
+  <p><button type="submit">Enviar</button></p>
+
+ </form>
+
+ <script type="module">
+
+  import { exportaAHtml } from "./lib/js/exportaAHtml.js"
+  import { muestraError } from "./lib/js/muestraError.js"
+  import { submitForm } from "./lib/js/submitForm.js"
+
+  /**
+   * @param {Event} event
+   */
+  async function procesaForm(event) {
+   try {
+    const respuesta =
+     await submitForm(
+      "srv/procesa.php", event)
+    alert(respuesta.body)
+   } catch (error) {
+    muestraError(error)
+   }
+  }
+  exportaAHtml(procesaForm)
+
+ </script>
+
+</body>
+
+</html>
